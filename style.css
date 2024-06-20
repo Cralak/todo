@@ -5,27 +5,49 @@
   
 
 #main {
-    background-color:#020f07;
+    font-family: "Inter";
+    background-color:#050210;
     width: 100vw;
     min-height: 100vh;
+    color:#dcf8e6;
 }
 
 #header {
     text-align: center;
     background-size: cover;
-    background-color:#020f07;
+    background-color:#050210;
     height:50px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.151);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.150);
     display: flex;
     align-items: center;
+    padding-left: 100px;
+    
 }
 
 .title {
-    text-align:top;
-    font-family: "Inter";
     font-weight: 500;
-    color:#dcf8e6;
     padding-left:5px;
+}
+
+.task-container {
+    margin:10px;
+    min-height:100px;
+    border: 1px solid rgba(255, 255, 255, 0.150);
+    border-radius: 5px;
+}
+
+.task-header {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    width: auto;
+    height:20px;
+    background-color:#194978;
+    padding:10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.150);
+}
+
+.task {
+    background-color:#050210;
 }
 
 /* Phone */
@@ -34,13 +56,5 @@
 
     #header {
         padding-left: 20px;
-    }
-}
-
-/* Computer */
-
-@media screen and (min-width: 800px) {
-    #header {
-        padding-left: 100px;
     }
 }
