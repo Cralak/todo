@@ -1,0 +1,46 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+  
+
+#main {
+    background-color:#020f07;
+    width: 100vw;
+    min-height: 100vh;
+}
+
+#header {
+    text-align: center;
+    background-size: cover;
+    background-color:#020f07;
+    height:50px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.151);
+    display: flex;
+    align-items: center;
+}
+
+.title {
+    text-align:top;
+    font-family: "Inter";
+    font-weight: 500;
+    color:#dcf8e6;
+    padding-left:5px;
+}
+
+/* Phone */
+
+@media screen and (max-width: 800px) {
+
+    #header {
+        padding-left: 20px;
+    }
+}
+
+/* Computer */
+
+@media screen and (min-width: 800px) {
+    #header {
+        padding-left: 100px;
+    }
+}
