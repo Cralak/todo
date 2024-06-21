@@ -117,10 +117,6 @@ header {
     border-radius: 5px;
 }
 
-.task-add-task{
-    
-}
-
 .task-input:focus {
     outline: none;
 }
