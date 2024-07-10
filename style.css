@@ -12,7 +12,11 @@
     background-color: #050210;
     width: 100vw;
     min-height: 100vh;
-    color: #dcf8e6;
+    color:rgb(154, 203, 246);
+}
+
+button {
+    line-height: 0;
 }
 
 header {
@@ -26,9 +30,16 @@ header {
     padding-left: 100px;
 }
 
-.title {
-    font-weight: 500;
-    padding-left: 5px;
+.add-sort-search {
+    margin:20px;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#temp-task {
+    display: none;
+    margin:20px auto;
 }
 
 .all-tasks {
@@ -48,20 +59,8 @@ header {
     background-color: #09041c;
 }
 
-.task-header {
-    font-size: 25px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    height: 15%;
-    background-color: #5464dc3c;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.150);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .task {
-    color: #dcf8e6d5;
+    color:rgb(154, 203, 246);
     height: calc(85% - 20px);
     padding: 10px 20px;
     overflow:scroll;
@@ -70,18 +69,12 @@ header {
 
 .new-task {
     color: #dcf8e6d5;
-    height: calc(70% - 20px);
+    height: calc(78% - 20px);
     overflow:scroll;
     line-height: 25px;
     display:flex;
     justify-content: center;
     margin-top:5px
-}
-
-.task-date-add {
-    display:flex;
-    justify-content:space-between;
-    
 }
 
 .add {
@@ -91,26 +84,36 @@ header {
     line-height: 0;
     border: none;
     background-color: #050210;
+    color:rgb(184, 222, 255);
 }
 
 .add:hover {
     background-color: #271d4e;
 }
 
-.task-datetime {
+.add:focus {
+    outline:none;
+}
+
+.newtask-datetime {
+    height:100%;
+    width:40%;
     display:flex;
     flex-direction: column;
 }
 
-.task-datetime-add {
+.newtask-datetime-add {
+    height: 27%;
     margin-left:2%;
     margin-right:2%;
     display:flex;
     flex-direction:row;
     justify-content: space-between;
+    align-items: center;
+
 }
 
-.task-header-input {
+.newtask-header-input {
     height: 50%;
     width: 90%;
     padding:1%;
@@ -120,7 +123,7 @@ header {
     border-radius: 5px;
 }
 
-.task-input {
+.newtask-input {
     height: 98%;
     width: 95%;
     border:1px solid rgba(255, 255, 255, 0.150);
@@ -130,15 +133,109 @@ header {
     border-radius: 5px;
 }
 
-.task-input:focus {
+.newtask-input:focus {
     outline: none;
 }
 
+.newtask-header-input:focus {
+    outline: none;
+}
 
+.newtask-datetime-group {
+    display:flex;
+    flex-direction: row;
+}
+
+.newtask-displays {
+    margin:auto 5px;
+}
+
+.newtask-add {
+    height:100%;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    background-color: #050210;
+    color:rgb(184, 222, 255);
+}
+
+.date-picker {
+    border:1px solid rgba(255, 255, 255, 0.150);
+    background-color: #050210;
+    color:rgb(154, 203, 246);
+}
+
+.date-picker:focus {
+    outline:none;
+}
+
+
+.time-picker {
+    border:1px solid rgba(255, 255, 255, 0.150);
+    background-color: #050210;
+    color:rgb(154, 203, 246);
+}
+
+.time-picker:focus {
+    outline:none;
+}
+
+
+#newtask-datetime-container {
+    transition:0.1s ease-in-out;
+    pointer-events:none;
+    opacity: 20%;
+}
+
+#datetimecheckbox {
+    opacity:0%;
+    position: relative;
+    z-index:2;
+    height:18px;
+    width:60px;
+}
+
+#datetimecheckbox:hover{
+    cursor:pointer;
+}
+
+.datetime-checkbox-container {
+    position:relative;
+    margin:5px;
+    width:60px;
+}
+
+.datetime-checkbox-container span {
+    padding-left: 10px;
+    position:absolute;
+    z-index:1;
+}
+
+.background-layer{
+    transition:0.1s ease-in-out;
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    border: 1px solid rgba(255, 255, 255, 0.150);
+    border-radius: 5px;
+    background-color:black;
+    z-index : 0;
+}
+
+#datetimecheckbox:checked+.background-layer {
+    transition:0.1s ease-in-out;
+    background-color:#1c5274;
+}
 
 /* TEST*/
 
-.layer {
+#button-10 .layer {
     background-color: #000000;
     border: 1px solid rgba(255, 255, 255, 0.150);
 }
@@ -153,16 +250,14 @@ header {
 }
 
 .button {
+    margin-left: 20px;
     position: relative;
-    top: 50%;
     width: 150px;
     height: 36px;
-    margin: 0 auto;
     overflow: hidden;
 }
 
 .button.b2 {
-    margin-top:50px;
     border-radius: 2px;
 }
 
@@ -225,7 +320,7 @@ header {
 #button-10 .knobs span {
     display: inline-block;
     left: 12px;
-    color: #fff;
+    color: #d0e3ef;
     z-index: 1;
 }
 
@@ -239,10 +334,8 @@ header {
 }
 
 #button-10 .checkbox:checked+.knobs:after {
-    color: #fff;
+    color: #d0e3ef;
 }
-
-
 
 /* Phone */
 
