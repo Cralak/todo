@@ -21,3 +21,7 @@ function hideNewTask(){
     document.getElementById("temp-task").style.display = "none";
     document.getElementById("newtask-add").style.display = "block";
 }
+
+function getTimeZone(){
+    return(Intl.DateTimeFormat().resolvedOptions().timeZone);
+}

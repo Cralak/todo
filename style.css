@@ -30,11 +30,67 @@ header {
     padding-left: 100px;
 }
 
+.task-dates {
+    height:22%;
+    margin-left:20px;
+    margin-right:10px;
+    display:flex;
+    flex-direction:column;
+    justify-content: space-between;
+}
+
+.task-date {
+    
+    text-align: right;
+    color:#454d84;
+}
+
+.task-deadline {
+    text-align: left;
+}
+
+.title span {
+    margin-left:10px;
+}
+
+.searchbar-container {
+    margin-left: 20px;
+    width:250px;
+    height: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.150);
+    border-radius: 4px;
+    background-color:#000000;
+    z-index:0;
+    display:flex;
+    align-items: center;
+}
+
+.searchbar {
+    padding-left:10px;
+    height:100%;
+    width:100%;
+    outline:none;
+    background:0;
+    border:0;
+    z-index:1;
+    color:aliceblue;
+}
+
+.searchbar-button:hover {
+    cursor:pointer;
+}
+
+.searchbar-button {
+    background-color:transparent;
+    border:none;
+}
+
 .add-sort-search {
     margin:20px;
     display:flex;
     flex-direction: row;
     justify-content: center;
+    align-items:center;
 }
 
 #temp-task {
@@ -55,26 +111,29 @@ header {
     margin-left: 10px;
     margin-top: 10px;
     border: 1px solid rgba(255, 255, 255, 0.150);
-    border-radius: 6px;
+    border-radius: 25px;
     background-color: #09041c;
 }
 
 .task {
     color:rgb(154, 203, 246);
-    height: calc(85% - 20px);
-    padding: 10px 20px;
+    height: 60%;
+    margin: 20px 20px;
+    padding:5px;
     overflow:scroll;
     line-height: 25px;
+    background-color:#060710;
+    border-radius: 20px;
 }
 
 .new-task {
     color: #dcf8e6d5;
-    height: calc(78% - 20px);
+    height: 68%;
     overflow:scroll;
     line-height: 25px;
     display:flex;
-    justify-content: center;
-    margin-top:5px
+    justify-content:center;
+    margin-top:10px
 }
 
 .add {
@@ -104,8 +163,8 @@ header {
 
 .newtask-datetime-add {
     height: 27%;
-    margin-left:2%;
-    margin-right:2%;
+    margin-left:10px;
+    margin-right:10px;
     display:flex;
     flex-direction:row;
     justify-content: space-between;
@@ -124,13 +183,13 @@ header {
 }
 
 .newtask-input {
-    height: 98%;
-    width: 95%;
+    height: 95%;
+    width: 90%;
     border:1px solid rgba(255, 255, 255, 0.150);
     resize: none;
     background-color:#050210;
     color:rgb(154, 203, 246);
-    border-radius: 5px;
+    border-radius: 7px;
 }
 
 .newtask-input:focus {
@@ -155,11 +214,9 @@ header {
     display:flex;
     flex-direction: column;
     justify-content: space-around;
-
     border-radius: 5px;
     cursor: pointer;
     border: none;
-    background-color: #050210;
     color:rgb(184, 222, 255);
 }
 
@@ -252,7 +309,7 @@ header {
 .button {
     margin-left: 20px;
     position: relative;
-    width: 150px;
+    width: 130px;
     height: 36px;
     overflow: hidden;
 }
@@ -290,9 +347,8 @@ header {
     transition: 0.3s ease all;
 }
 
-
 #button-10 .knobs:before {
-    width: 60px;
+    width: 52px;
     position: absolute;
     top: 4px;
     height: 10px;
@@ -313,13 +369,13 @@ header {
 
 #button-10 .knobs:after {
     content: "UPCOMING";
-    right: 6px;
+    right: 1.5px;
     color: #4e4e4e;
 }
 
 #button-10 .knobs span {
     display: inline-block;
-    left: 12px;
+    left: 10px;
     color: #d0e3ef;
     z-index: 1;
 }
@@ -329,7 +385,7 @@ header {
 }
 
 #button-10 .checkbox:checked+.knobs:before {
-    left: 78px;
+    left: 66px;
     background-color: #472591;
 }
 
@@ -347,5 +403,19 @@ header {
 
     .task-container {
         width: 45.5vw;
+        height: 60vw;
+    }
+
+    .searchbar-container {
+        width:115px;
+    }
+
+    .task {
+        margin:10px;
+        height:57%;
+    }
+
+    .task-dates {
+        height:25%;
     }
 }
