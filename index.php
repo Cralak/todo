@@ -31,10 +31,10 @@
 
         <!-- ADD NEW TASK -->
 
-        <form action="eeee.php" method="POST">
+        <form action="addtask.php" method="POST">
             <div class="task-container" id="temp-task">
                 <div class="new-task">
-                    <textarea name="task_text" autocomplete="off" class="newtask-input" placeholder="Describe your task..."></textarea>
+                    <textarea name="newtask_text" autocomplete="off" class="newtask-input" placeholder="Describe your task..."></textarea>
                 </div>
                 <div class="newtask-datetime-add">
                     <div class="newtask-datetime" id="datetime-picker">
@@ -45,11 +45,11 @@
                         </div>
                         <div id="newtask-datetime-container">
                             <div class="newtask-datetime-group"> 
-                                <input name="task_date" type="date" class="date-picker" autocomplete="off">
+                                <input name="newtask_date" type="date" class="date-picker" autocomplete="off">
                             </div>
                             <div class="newtask-datetime-group">
                                 <div class="newtask-time-picker">
-                                    <input name="task-time" type="time" class="time-picker" autocomplete="off">
+                                    <input name="newtask_time" type="time" class="time-picker" autocomplete="off">
                                 </div>
                             </div>
                         </div>
@@ -104,80 +104,64 @@
         <div class="all-tasks">
             <!-- All tasks -->
 
-
             <?php
 
             $tasks = fetchData("tasks");
+
             foreach ($tasks as $task): ?>
+
 
             <div class="task-container">
                 <div class="task">
                     <?php echo $task[task_text]; ?>
                 </div>
                 <div class=task-dates>
-                    <div class="task-deadline">
-                    <?php echo substr($task[task_deadline], 0, -3) ?>
-                    </div>
-                    <div class="task-date" title="<?php echo $task[task_date]; ?>">
-                        <?php
-
-                        
+                    <div class="task-deadline" title="<?php echo $task[task_deadline] ?>">
+                    <?php
 
                         // $timezone = "<script type='text/javascript'>document.write(getTimeZone());</script>"; THIS DID NOT WORK
 
-                        date_default_timezone_set("Europe/Paris");
-
-                        $date_added = new DateTime($task[task_date]);
+                        $date_deadline = new DateTime($task[task_deadline]);
 
                         $date_now = new DateTime(date("Y-m-d H:i:s"));
 
-                        $date_diff = $date_added->diff($date_now);
-
-                        $str = "";
-                        
-                        if($date_diff->y > 0){
-                            if($date_diff->y == 1){
-                                $str = $date_diff->y . " year ago";
-                            } else {
-                                $str = $date_diff->y . " years ago";
+                        if ($date_deadline > $date_now){
+                            $date_diff = $date_deadline->diff($date_now);
+                            $str = dateTimeToString($date_diff);
+                            if (!empty($str)){
+                                echo $str . " remaining"; 
                             }
-                        } else if($date_diff->m > 0){
-                            if($date_diff->m == 1){
-                                $str = $date_diff->m . " month ago";
-                            } else {
-                                $str = $date_diff->m . " months ago";
-                            }
-                        } else if($date_diff->d > 0){
-                            if($date_diff->d == 1){
-                                $str = $date_diff->d . " day ago";
-                            } else {
-                                $str = $date_diff->d . " days ago";
-                            }
-                        } else if($date_diff->h > 0){
-                            if($date_diff->h == 1){
-                                $str = $date_diff->h . " hour ago";
-                            } else {
-                                $str = $date_diff->h . " hours ago";
-                            }
-                        } else if($date_diff->i > 0){
-                            if($date_diff->i == 1){
-                                $str = $date_diff->i . " minute ago";
-                            } else {
-                                $str = $date_diff->i . " minutes ago";
-                            }
-                        } else if($date_diff->s > 0){
-                            if($date_diff->s == 1){
-                                $str = $date_diff->s . " second ago";
-                            } else {
-                                $str = $date_diff->s . " seconds ago";
-                            }
+                        } else if (!empty($str)) {
+                            echo "You missed your deadline !";
                         }
 
-                        echo $str; ?>
+                        ?>
+                    </div>
+                    <div class="task-date-trash">
+                        
+                        <button class="delete-task" onClick="deleteTask(this.id)" id="<?php echo $task[id] ?>"  >
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
+                        </button>
+                        
+
+                        <div class="task-date" title="<?php echo $task[task_date]; ?>">
+                            <?php
+
+                            // $timezone = "<script type='text/javascript'>document.write(getTimeZone());</script>"; THIS DID NOT WORK
+
+                            $date_added = new DateTime($task[task_date]);
+
+                            $date_now = new DateTime(date("Y-m-d H:i:s"));
+
+                            $date_diff = $date_added->diff($date_now);
+
+                            $str = dateTimeToString($date_diff);
+
+                            echo $str . " ago"; ?>
+                        </div>
                     </div>
                 </div>
             </div>
-    
             <?php endforeach; ?>
         </div>
     </div>

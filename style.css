@@ -30,9 +30,24 @@ header {
     padding-left: 100px;
 }
 
+.delete-task {
+    background-color: #00000000;
+    border:none;
+}
+
+.delete-task:hover{
+    cursor:pointer;
+}
+
+.task-date-trash {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 .task-dates {
     height:22%;
-    margin-left:20px;
+    margin-left:10px;
     margin-right:10px;
     display:flex;
     flex-direction:column;

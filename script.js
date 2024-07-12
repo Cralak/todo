@@ -25,3 +25,7 @@ function hideNewTask(){
 function getTimeZone(){
     return(Intl.DateTimeFormat().resolvedOptions().timeZone);
 }
+
+function deleteTask(id) {
+    window.location.href = "deletetask.php?id=" + id;
+}

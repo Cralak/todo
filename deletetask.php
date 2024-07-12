@@ -2,8 +2,8 @@
 
 require_once "tools.php";
 
-if(!empty($_POST)){
-    insertNewTask("tasks", $_POST);
+if(!empty($_GET)){
+    deleteTask($_GET);
 }
 
 header("Location: index.php");
