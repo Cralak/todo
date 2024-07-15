@@ -1,7 +1,8 @@
+document.getElementById("datepicker").setAttribute('min', new Date().toISOString().split("T")[0]);
 
 function showNewTask(){
     document.getElementById("temp-task").style.display = "block";
-    document.getElementById("newtask-add").style.display = "none";
+    document.getElementById("newtask-add").style.opacity = "0%";
 }
 
 
@@ -19,7 +20,7 @@ function showDateTime(){
 
 function hideNewTask(){
     document.getElementById("temp-task").style.display = "none";
-    document.getElementById("newtask-add").style.display = "block";
+    document.getElementById("newtask-add").style.opacity = "100%";
 }
 
 function getTimeZone(){
@@ -28,4 +29,23 @@ function getTimeZone(){
 
 function deleteTask(id) {
     window.location.href = "deletetask.php?id=" + id;
+}
+
+function dropdown() {
+    document.getElementById("sort-dropdown").classList.toggle("show");
+}
+
+
+var text = document.getElementById("searchbar");
+
+var alltasks = $('#alltasks > div');
+
+function search() {
+    alltasks.each(function(){
+        this.classList.add("hide");
+        if(this.children[0].innerText.toUpperCase().indexOf(text.value.toUpperCase()) > -1){
+            this.classList.remove("hide");
+        }
+    });
+    return false;
 }

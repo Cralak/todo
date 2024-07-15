@@ -2,23 +2,29 @@
 
 date_default_timezone_set("Europe/Paris");
 
-function deleteTask($data) {
-
+function connectToDb() {
     $servername = "localhost"; 
     $username = "root"; 
     $password = "root"; 
     $databasename = "todoes";
+    try{
+        $conn = new PDO("mysql:host=$servername;dbname=$databasename", $username, $password); 
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
+        return $conn;
+    } catch(PDOException $e) {
+    echo "Error: " . $e->getMessage(); 
+    } 
+}
 
+
+function deleteTask($data) {
+    $conn = connectToDb();
     try 
     { 
-        $conn = new PDO("mysql:host=$servername;dbname=$databasename", $username, $password); 
-
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
         $stmt = $conn->prepare("DELETE FROM tasks WHERE id=:id");
         $stmt->bindParam(':id', $data[id]);
         $stmt->execute();
         // EXECUTING THE QUERY 
-        
     } catch(PDOException $e) {
         echo "Error: " . $e->getMessage(); 
     } 
@@ -27,22 +33,20 @@ function deleteTask($data) {
 }
 
 
-function fetchData($query) {
+function fetchTasks() {
+    $conn = connectToDb();
+    $query = "SELECT * FROM tasks ORDER BY task_date DESC";
 
-    $servername = "localhost"; 
-    $username = "root"; 
-    $password = "root"; 
-    $databasename = "todoes";
 
+    // if (!empty($data[searchbar])){
+    //     $query .= " WHERE task_text LIKE '%" . $data[searchbar] . "%';";
+    // }
     try 
-    { 
-        $conn = new PDO("mysql:host=$servername;dbname=$databasename", $username, $password); 
-
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
-        $stmt = $conn->prepare("SELECT * FROM $query"); 
+    {
+        $stmt = $conn->prepare($query); 
         $stmt->execute();
         // EXECUTING THE QUERY 
-        $r = $stmt->setFetchMode(PDO::FETCH_ASSOC); 
+        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC); 
         // FETCHING DATA FROM DATABASE AND RETURNING IT
         return $result = $stmt->fetchAll(); 
     } catch(PDOException $e) {
@@ -54,26 +58,16 @@ function fetchData($query) {
 
 
 function insertNewTask($data) {
-
-    $servername = "localhost"; 
-    $username = "root"; 
-    $password = "root"; 
-    $databasename = "todoes";
-
+    $conn = connectToDb();
     try 
     { 
-        if(!empty($data[newtask_date]) && !empty($data[newtask_time])){
+        if(!empty($data[newtask_date]) && !empty($data[newtask_time]) && $data[date_enabled]){
             $datetime = $data[newtask_date].$data[newtask_time];
 
             $deadline = DateTime::createFromFormat('Y-m-dH:i' , $datetime);
 
             $formattedDeadline = $deadline->format('Y-m-d H:i:s');
         }
-
-
-        $conn = new PDO("mysql:host=$servername;dbname=$databasename", $username, $password); 
-
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
         $stmt = $conn->prepare("INSERT INTO tasks(task_text, task_deadline) VALUES(:text, :date)");
         $stmt->bindParam(':date', $formattedDeadline);
         $stmt->bindParam(':text', $data[newtask_text]);
