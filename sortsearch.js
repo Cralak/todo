@@ -11,7 +11,8 @@ $(document).ready(function(){
             1 : -1
         )});
         //empty the main div and re-append the ordered divs
-        $('#alltasks').empty().append(ordered);
+        divs.remove();
+        $("#alltasks").append(ordered);
     });
 
     //same thing here
@@ -21,7 +22,8 @@ $(document).ready(function(){
         var ordered = divs.sort(function(a,b) {
             return $(a.children[1].children[1].children[1]).attr('title') > $(b.children[1].children[1].children[1]).attr('title');
         });
-        $('#alltasks').empty().append(ordered);
+        divs.remove();
+        $("#alltasks").append(ordered);
     });
 
     $('#newest').click(function(){
@@ -29,6 +31,7 @@ $(document).ready(function(){
         var ordered = divs.sort(function(a,b) {
             return $(a.children[1].children[1].children[1]).attr('title') < $(b.children[1].children[1].children[1]).attr('title');
         });
-        $('#alltasks').empty().append(ordered);
+        divs.remove();
+        $("#alltasks").append(ordered);
     });
 });
