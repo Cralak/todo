@@ -42,8 +42,8 @@ if (!empty($_SESSION)) {
             </span>
 
             <div class="login-text-container">
-                <input id="loginusername" class="login-text" type="text" name="username" placeholder="Username">
-                <input id="loginpassword" class="login-text" type="password" name="password" placeholder="Password">
+                <input autocomplete="off" id="loginusername" class="login-text" type="text" name="username" placeholder="Username">
+                <input autocomplete="off" id="loginpassword" class="login-text" type="password" name="password" placeholder="Password">
             </div>
             <div class="login-submit-container">
                 <input id="login-submit" type="submit" type="button" value="Log in">

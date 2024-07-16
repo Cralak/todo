@@ -212,7 +212,7 @@ if(empty($_SESSION)){
 
                             $str = dateTimeToString($date_diff);
 
-                            echo $str . " ago"; ?>
+                            echo $str == "" ? "Just now" : $str . " ago"; ?>
                         </div>
                     </div>
                 </div>

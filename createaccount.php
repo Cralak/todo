@@ -5,7 +5,7 @@ require_once "tools.php";
 if(!empty($_POST)) {
     $conn = connectToDb();
     try{
-        if((preg_match("/^[^\s@]+@[^\s@]+\.[^\s@]+$/", $_POST[mail])) && (preg_match("/^[a-zA-Z0-9-]{3,20}$/", $_POST[username])) && (preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d\s]).{8,}$/", $_POST[password]))){
+        if((preg_match("/^[^\s@]+@[^\s@]+\.[^\s@]+$/", $_POST[mail])) && (preg_match("/^[a-zA-Z0-9-_]{3,20}$/", $_POST[username])) && (preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d\s]).{8,}$/", $_POST[password]))){
             $mail = strtolower($_POST[mail]);
             $username = $_POST[username];
             $pass = password_hash(($_POST[password]), PASSWORD_DEFAULT);

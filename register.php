@@ -40,8 +40,8 @@ if (session_status() === PHP_SESSION_ACTIVE) {
             </span>
 
             <div class="login-text-container">
-                <input id="mail" class="login-text" type="text" name="mail" placeholder="E-Mail">
-                <input id="username" class="login-text" type="text" name="username" placeholder="Username">
+                <input autocomplete="off" id="mail" class="login-text" type="text" name="mail" placeholder="E-Mail">
+                <input autocomplete="off" id="username" class="login-text" type="text" name="username" placeholder="Username">
                 <input id="password" class="login-text" type="password" name="password" placeholder="Password">
                 <input id="passwordconfirm" class="login-text" type="password" placeholder="Confirm password">
             </div>

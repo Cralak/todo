@@ -11,7 +11,7 @@ document.getElementById('mail').addEventListener('input', (event) => {
 });
 
 document.getElementById('username').addEventListener('input', (event) => {
-    inputValidator["username"] = /^[a-zA-Z0-9-]{3,20}$/.test(event.target.value);
+    inputValidator["username"] = /^[a-zA-Z0-9-_]{3,20}$/.test(event.target.value);
     isFormValid();
 });
 document.getElementById('password').addEventListener('input', (event) => {
