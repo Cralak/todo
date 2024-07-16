@@ -1,14 +1,16 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: "Inconsolata", monospace;
+    font-optical-sizing: auto;
+    font-weight: 350;
+    font-style: normal;
+    font-variation-settings:
+        "wdth" 100;
 }
 
-#body {
+body {
     background-color: #000000;
-}
-
-#main {
-    font-family: "Inconsolata";
     width: 100vw;
     min-height: 100vh;
     color:rgb(0, 255, 0);
@@ -36,10 +38,97 @@ header h3 {
     margin-left:10px;
 }
 
+#error{
+    width:100%;
+    min-height:20px;
+    height:fit-content;
+    margin-top:20px;
+    color:red;
+    text-wrap:wrap;
+    font-size:14px;
+}
+
+#login-title {
+    margin-bottom:10px;
+}
+
+.login-form-container {
+    height:calc(100vh - 51px);
+    width:100vw;
+    display:flex;
+    justify-content: center;
+    align-items:center;
+}
+
+.login-form {
+    width:200px;
+    height:fit-content;
+    display:flex;
+    flex-direction:column;
+    padding:10px 5px;
+    border:rgb(0, 155, 0) solid 1px;
+    border-radius:2px;
+    background-color:rgb(0, 20, 0);
+}
+
+.login-submit-container {
+    height:50px;
+    display:flex;
+    flex-direction:column;
+    justify-content: space-between;
+}
+
+.login-submit-container a {
+    color:rgb(0, 255, 0);
+    font-size:14px;
+}
+
+.login-submit-container input {
+    height:22px;
+    width:60px;
+    background-color:rgb(0, 60, 0);
+    color:inherit;
+    border:1px solid rgb(0, 155, 0);
+    border-radius:2px;
+}
+
+#login-submit:hover {
+    cursor:pointer;
+}
+
+#login-submit:disabled {
+    opacity:25%;
+    cursor:default;
+}
+
+.login-text-container {
+    height:fit-content;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+}
+
+.login-text-container span {
+    height:20px;
+}
+
+.login-text {
+    background:black;
+    color:rgb(0, 255, 0);
+    border:solid 1px rgb(0, 155, 0);
+    border-radius: 2px;
+    height:25px;
+    padding-left:5px;
+    margin-bottom:20px;
+}
+
+.login-text:focus {
+    outline:none;
+}
+
 .title {
     display:flex;
     flex-direction:row;
-
 }
 
 .account {
@@ -98,7 +187,7 @@ header h3 {
 
 .sort-layout span {
     font-size: 11px;
-    text-shadow: 2px 2px 1px black;
+    text-shadow: 0px 0px 2px black;
 }
 
 .sort-button:checked+.sort-layout {
@@ -146,7 +235,10 @@ header h3 {
 
 .title span {
     margin-left:10px;
+    font-weight:300;
+    font-size:23px;
 }
+
 
 .searchbar-container {
     margin-left: 20px;
@@ -192,7 +284,6 @@ header h3 {
 
 #temp-task {
     display: none;
-    margin:20px auto;
 }
 
 .all-tasks {
@@ -225,12 +316,15 @@ header h3 {
 }
 
 .new-task {
-    height: 68%;
+    margin: 20px 5px 0px;
+    padding:5px;
+    height: 60%;
     overflow:scroll;
     line-height: 25px;
     display:flex;
     justify-content:center;
-    margin-top:10px
+    border:1px solid rgb(0, 155, 0);
+    border-radius: 2px;
 }
 
 .add {
@@ -253,6 +347,7 @@ header h3 {
 
 .newtask-datetime-add {
     height: 27%;
+    margin-top:5px;
     margin-left:10px;
     margin-right:10px;
     display:flex;
@@ -263,16 +358,12 @@ header h3 {
 }
 
 .newtask-input {
-    padding:5px;
-    height: 92%;
+    height: 100%;
     width: 100%;
-    margin-left:5px;
-    margin-right:5px;
-    border:1px solid rgb(0, 155, 0);
     resize: none;
     background-color:rgb(0, 0, 0);
     color:rgb(0, 255, 0);
-    border-radius: 2px;
+    border:none;
 }
 
 .newtask-input:focus {

@@ -1,5 +1,7 @@
 <?php 
 
+session_start();
+
 date_default_timezone_set("Europe/Paris");
 
 function connectToDb() {
@@ -16,34 +18,13 @@ function connectToDb() {
     } 
 }
 
-
-function deleteTask($data) {
+function fetchTasks($id) {
     $conn = connectToDb();
-    try 
-    { 
-        $stmt = $conn->prepare("DELETE FROM tasks WHERE id=:id");
-        $stmt->bindParam(':id', $data[id]);
-        $stmt->execute();
-        // EXECUTING THE QUERY 
-    } catch(PDOException $e) {
-        echo "Error: " . $e->getMessage(); 
-    } 
 
-    $conn=null;
-}
-
-
-function fetchTasks() {
-    $conn = connectToDb();
-    $query = "SELECT * FROM tasks ORDER BY task_date DESC";
-
-
-    // if (!empty($data[searchbar])){
-    //     $query .= " WHERE task_text LIKE '%" . $data[searchbar] . "%';";
-    // }
     try 
     {
-        $stmt = $conn->prepare($query); 
+        $stmt = $conn->prepare("SELECT * FROM tasks WHERE user_id=:id ORDER BY task_date DESC"); 
+        $stmt->bindParam(':id', $id);
         $stmt->execute();
         // EXECUTING THE QUERY 
         $result = $stmt->setFetchMode(PDO::FETCH_ASSOC); 
@@ -56,35 +37,34 @@ function fetchTasks() {
     $conn=null;
 }
 
-
-function insertNewTask($data) {
+function login($data) {
     $conn = connectToDb();
     try 
-    { 
-        if(!empty($data[newtask_date]) && !empty($data[newtask_time]) && $data[date_enabled]){
-            $datetime = $data[newtask_date].$data[newtask_time];
-
-            $deadline = DateTime::createFromFormat('Y-m-dH:i' , $datetime);
-
-            $formattedDeadline = $deadline->format('Y-m-d H:i:s');
-        }
-        $stmt = $conn->prepare("INSERT INTO tasks(task_text, task_deadline) VALUES(:text, :date)");
-        $stmt->bindParam(':date', $formattedDeadline);
-        $stmt->bindParam(':text', $data[newtask_text]);
+    {
+        $stmt = $conn->prepare("SELECT * FROM users WHERE LOWER(username) = :username OR mail = :username");
+        $stmt->bindParam(':username', strtolower($data[username]));
         $stmt->execute();
         // EXECUTING THE QUERY 
-        
+        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC); 
+        // FETCHING DATA FROM DATABASE AND RETURNING IT
+        $r = $stmt->fetchAll();
+
+        if(empty($r)) {
+            header("Location: login.php?error=0");
+        } else if (!password_verify($data[password], $r[0][pass])){
+            header("Location: login.php?error=1");
+        } else {
+            session_start();
+            $_SESSION[id] = $r[0][id];
+        }
+
     } catch(PDOException $e) {
         echo "Error: " . $e->getMessage(); 
-    } 
-
-    $conn=null;
+    }
 }
 
 function dateTimeToString($date){
-
-    $str = "";
-                        
+    $str = "";                        
                         
     if($date->y > 0){
         if($date->y == 1){

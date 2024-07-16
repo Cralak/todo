@@ -1,12 +1,10 @@
 <?php
 
-require_once("tools.php");
-
 if (!empty($_POST)) {
-    login($_POST);
+    login();
 }
 
-if (!empty($_SESSION)) {
+if (session_status() === PHP_SESSION_ACTIVE) {
     header("Location: index.php");
 }
 
@@ -17,7 +15,7 @@ if (!empty($_SESSION)) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=, initial-scale=1.0">
-    <title>Login</title>
+    <title>Register</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,25 +34,31 @@ if (!empty($_SESSION)) {
         </div>
     </header>
     <div class="login-form-container">
-        <form method="POST" action="login.php" class="login-form">
+        <form method="POST" action="createaccount.php" class="login-form">
             <span id=login-title>
-                > Login
+                > Register
             </span>
 
             <div class="login-text-container">
-                <input id="loginusername" class="login-text" type="text" name="username" placeholder="Username">
-                <input id="loginpassword" class="login-text" type="password" name="password" placeholder="Password">
+                <input id="mail" class="login-text" type="text" name="mail" placeholder="E-Mail">
+                <input id="username" class="login-text" type="text" name="username" placeholder="Username">
+                <input id="password" class="login-text" type="password" name="password" placeholder="Password">
+                <input id="passwordconfirm" class="login-text" type="password" placeholder="Confirm password">
             </div>
             <div class="login-submit-container">
-                <input id="login-submit" type="submit" type="button" value="Log in">
-                <a class="" href="register.php">> No account yet ?</a>
+                <input id="login-submit" disabled type="submit" type="button" value="Register">
+                <a class="" href="login.php">> Go back to login</a>
             </div>
             <span id="error">
                 <?php
-                echo !empty($_GET) ? $_GET[error]=="0" ? $_GET[error]=="1" ? : "> Wrong username" : "> Wrong password" : "";
+                if(!empty($_GET)) {
+                    echo $_GET[error] == "0" ? $_GET[error] == "1" ? : "> Mail already used" : "> Username already used";
+                }
                 ?>
             </span>
         </form>
     </div>
 </body>
 </html>
+
+<script src="accountscript.js"></script>
